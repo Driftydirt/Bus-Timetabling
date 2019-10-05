@@ -3,6 +3,12 @@
 
 module.exports = function (config) {
   config.set({
+    target: 'node',
+    node: {
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
+    },
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [

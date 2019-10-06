@@ -2,23 +2,23 @@
   <head></head>
   <body>
     <div class="col col-lg-4 offset-lg-4">
-    <div class="row">
-    <ng-container *ngIf="config | async as loadedConfig">
-      <app-bus-data class="col" [config]="loadedConfig"></app-bus-data>
-    </ng-container>
-    </div>
-    <div class="row">
-    <button class="col" (click)="showConfig()">Get live arrivals</button>
-    </div>
+      <div class="row">
+        <ng-container *ngIf="config | async as loadedConfig">
+          <app-bus-data class="col" [config]="loadedConfig"></app-bus-data>
+        </ng-container>
+      </div>
+      <div class="row">
+        <button class="col" (click)="showConfig()">Get live arrivals</button>
+      </div>
     </div>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/7.1.0/firebase-app.js"></script>
+    <script src="/__/firebase/7.1.0/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/7.1.0/firebase-analytics.js"></script>
+    <script src="/__/firebase/7.1.0/firebase-analytics.js"></script>
 
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
   </body>
 </html>

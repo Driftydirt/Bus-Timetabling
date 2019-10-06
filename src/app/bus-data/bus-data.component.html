@@ -1,20 +1,25 @@
-<h1 class="col text-center">{{config.name}}</h1>
-  <div *ngFor="let route of config.routes">
-    <div>Bus Number: {{route[0]}}</div>
-            <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Planned time of arrival</th>
-                        <th scope="col">Expected time of arrival</th>
-                      </tr>
-                    </thead> 
-                    
-                    <tbody>
-                      <tr *ngFor="let departure of route[1]">
-                        <td scope="row">{{departure.aimed_departure_time}}</td>
-                        <td scope="row">{{!!departure.expected_departure_time ? departure.expected_departure_time : departure.best_departure_estimate}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-      
-                </div>
+<h1 class="col text-center">{{ config.name }}</h1>
+<div *ngFor="let route of config.routes">
+  <div>Bus Number: {{ route[0] }}</div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Planned time of arrival</th>
+        <th scope="col">Expected time of arrival</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let departure of route[1]">
+        <td scope="row">{{ departure.aimed_departure_time }}</td>
+        <td scope="row">
+          {{
+            !!departure.expected_departure_time
+              ? departure.expected_departure_time
+              : departure.best_departure_estimate
+          }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

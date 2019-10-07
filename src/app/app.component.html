@@ -1,16 +1,29 @@
 <html>
   <head></head>
   <body>
-    <div class="col col-lg-4 offset-lg-4">
-      <div class="row">
-        <ng-container *ngIf="config | async as loadedConfig">
+    <div class="col col-lg-6 offset-lg-3">
+      <div class="row main">
+        <ng-container *ngIf="config | async as loadedConfig; else loading">
           <app-bus-data class="col" [config]="loadedConfig"></app-bus-data>
         </ng-container>
       </div>
-      <div class="row">
-        <button class="col" (click)="showConfig()">Get live arrivals</button>
+      <div class="row main">
+        <button
+          type="button"
+          class="col col-4 offset-4 btn btn-primary"
+          (click)="showConfig()"
+        >
+          Get live arrivals
+        </button>
       </div>
     </div>
+    <ng-template #loading>
+      <div class="text-center col">
+        <div class="spinner-border text-warning " role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="/__/firebase/7.1.0/firebase-app.js"></script>
 

@@ -22,7 +22,8 @@ export class BusDataComponent implements OnInit {
         aimed_departure_time: "23:41",
         expected_departure_time: "23:42",
         best_departure_estimate: "23:42",
-        bus_number: "1"
+        bus_number: "1",
+        delay: ""
       },
       {
         mode: "bus",
@@ -31,7 +32,8 @@ export class BusDataComponent implements OnInit {
         aimed_departure_time: "23:50",
         expected_departure_time: "23:56",
         best_departure_estimate: "23:56",
-        bus_number: "1"
+        bus_number: "1",
+        delay: ""
       }
     ];
     this.testData = {
@@ -40,5 +42,33 @@ export class BusDataComponent implements OnInit {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.testRoutes) {
+      this.testRoutes.map(x => {
+        x.delay = this.getDelay(x);
+      });
+    }
+    if (this.config) {
+      this.config.routes.map(x => {
+        x[1].map(x => {
+          x.delay = this.getDelay(x);
+        });
+      });
+    }
+  }
+
+  getDelay(route: Departures): string {
+    let delay =
+      Number(route.best_departure_estimate.replace(":", "")) -
+      Number(route.aimed_departure_time.replace(":", ""));
+    let hours = Math.floor(delay / 60);
+    let minutes = delay % 60;
+    if (minutes === 0) {
+      return String(hours) + ":" + "00";
+    } else if (minutes.toString().length < 2) {
+      return String(hours) + ":0" + String(minutes);
+    } else {
+      return String(hours) + ":" + String(minutes);
+    }
+  }
 }

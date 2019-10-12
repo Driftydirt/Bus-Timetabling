@@ -16,6 +16,7 @@ export interface Departures {
   expected_departure_time: string;
   best_departure_estimate: string;
   bus_number: string;
+  delay: string;
 }
 
 // tslint:disable-next-line: max-line-length

@@ -1,4 +1,4 @@
-<ng-container [ngSwitch]="true">
+<ng-container [ngSwitch]="false">
   <ng-container *ngSwitchCase="true">
     <ng-container *ngIf="testData">
       <h1 class="col text-center">{{ config?.name }}</h1>
@@ -9,6 +9,7 @@
             <tr>
               <th scope="col">Planned time of arrival</th>
               <th scope="col">Expected time of arrival</th>
+              <th scope="col">Delay</th>
             </tr>
           </thead>
 
@@ -21,6 +22,9 @@
                     ? departure.expected_departure_time
                     : departure.best_departure_estimate
                 }}
+              </td>
+              <td scope="row">
+                {{ departure.delay }}
               </td>
             </tr>
           </tbody>
@@ -37,6 +41,7 @@
           <tr>
             <th scope="col">Planned time of arrival</th>
             <th scope="col">Expected time of arrival</th>
+            <th scope="col">Delay</th>
           </tr>
         </thead>
 
@@ -49,6 +54,9 @@
                   ? departure.expected_departure_time
                   : departure.best_departure_estimate
               }}
+            </td>
+            <td scope="row">
+              {{ departure.delay }}
             </td>
           </tr>
         </tbody>

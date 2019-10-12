@@ -1,10 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, isDevMode } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { BusApiService, Config, Departures } from "./bus-api.service";
+import { BusApiService, Departures } from "./bus-api.service";
 
-interface Results {
+export interface Results {
   name: string;
   routes: [number, Departures[]][];
 }

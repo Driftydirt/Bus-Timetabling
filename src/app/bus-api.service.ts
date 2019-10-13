@@ -20,6 +20,7 @@ export interface Departures {
   bus_number: string;
   delay: string;
   ETA: string;
+  colour: string;
 }
 
 // tslint:disable-next-line: max-line-length
@@ -47,7 +48,8 @@ export class RealBusApiService extends BusApiService {
               (d: any): Departures => ({
                 ...d,
                 delay: this.getDelay(d),
-                ETA: this.getETA(d)
+                ETA: this.getETA(d),
+                colour: this.getColour(d)
               })
             )
           )
@@ -79,5 +81,17 @@ export class RealBusApiService extends BusApiService {
     const bestTime = this.timeStringToMoment(route.best_departure_estimate);
 
     return bestTime.from(Date.now(), true);
+  }
+
+  getColour(route: Departures): string {
+    const parts = route.best_departure_estimate.split(":").map(Number);
+
+    if (parts[1] <= 5) {
+      return "green";
+    } else if (parts[1] <= 10) {
+      return "yellow";
+    } else {
+      return "red";
+    }
   }
 }

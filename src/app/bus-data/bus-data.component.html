@@ -8,6 +8,7 @@
         <th scope="col">Planned time of arrival</th>
         <th scope="col">Expected time of arrival</th>
         <th scope="col">Delay</th>
+        <th scope="col">ETA</th>
       </tr>
     </thead>
 
@@ -16,7 +17,7 @@
         <td scope="row">{{ departure.aimed_departure_time }}</td>
         <td scope="row">
           {{
-            !!departure.expected_departure_time
+            !!departure.expected_departure_times
               ? departure.expected_departure_time
               : departure.best_departure_estimate
           }}
@@ -24,6 +25,7 @@
         <td scope="row">
           {{ departure.delay }}
         </td>
+        <td scope="row">{{ departure.ETA }}</td>
       </tr>
     </tbody>
   </table>

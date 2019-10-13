@@ -19,6 +19,7 @@ export interface Departures {
   best_departure_estimate: string;
   bus_number: string;
   delay: string;
+  ETA: string;
 }
 
 // tslint:disable-next-line: max-line-length
@@ -45,7 +46,8 @@ export class RealBusApiService extends BusApiService {
             departures.map(
               (d: any): Departures => ({
                 ...d,
-                delay: this.getDelay(d)
+                delay: this.getDelay(d),
+                ETA: this.getETA(d)
               })
             )
           )
@@ -72,5 +74,10 @@ export class RealBusApiService extends BusApiService {
       .minute(parts[1])
       .second(0)
       .millisecond(0);
+  }
+  getETA(route: Departures): string {
+    const bestTime = this.timeStringToMoment(route.best_departure_estimate);
+
+    return bestTime.from(Date.now(), true);
   }
 }

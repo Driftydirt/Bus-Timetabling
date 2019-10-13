@@ -18,7 +18,8 @@ export class FakeBusApiService extends BusApiService {
         expected_departure_time: "23:42",
         best_departure_estimate: "23:42",
         bus_number: "1",
-        delay: "1 minute"
+        delay: "1 minute",
+        ETA: "6 minutes"
       },
       {
         mode: "bus",
@@ -28,7 +29,8 @@ export class FakeBusApiService extends BusApiService {
         expected_departure_time: "23:56",
         best_departure_estimate: "23:56",
         bus_number: "1",
-        delay: "6 minutes"
+        delay: "6 minutes",
+        ETA: "9 minutes"
       }
     ];
     const testConfig: Config = {

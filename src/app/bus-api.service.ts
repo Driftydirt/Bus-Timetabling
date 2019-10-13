@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import * as moment from "moment";
+import { mapValues } from "lodash";
 
 export interface Config {
   name: string;
@@ -23,19 +25,52 @@ export interface Departures {
 const URL =
   "https://transportapi.com/v3/uk/bus/stop/40004407177A/live.json?app_id=92ccbc9b&app_key=08155b6c5dcad61ad8000612ba8f0a29&group=route&nextbuses=yes";
 
-@Injectable({
-  providedIn: "root"
-})
-export class BusApiService {
-  constructor(private http: HttpClient) {}
+export abstract class BusApiService {
+  abstract getBusData(): Observable<Config>;
+}
+
+@Injectable()
+export class RealBusApiService extends BusApiService {
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getBusData(): Observable<Config> {
     return this.http.get(URL).pipe(
-      map((json: any) => ({
-        // tslint:disable: no-string-literal
-        name: json["name"],
-        departures: json["departures"]
-      }))
+      map(
+        (json: any): Config => ({
+          // tslint:disable: no-string-literal
+          name: json["name"],
+          departures: mapValues(json["departures"], departures =>
+            departures.map(
+              (d: any): Departures => ({
+                ...d,
+                delay: this.getDelay(d)
+              })
+            )
+          )
+        })
+      )
     );
+  }
+
+  getDelay(route: Departures): string {
+    const aimTime = this.timeStringToMoment(route.aimed_departure_time);
+    const bestTime = this.timeStringToMoment(route.best_departure_estimate);
+
+    if (aimTime.isSame(bestTime)) {
+      return "on time";
+    }
+
+    return bestTime.from(aimTime, true);
+  }
+
+  private timeStringToMoment(timeStr: string) {
+    const parts = timeStr.split(":").map(Number);
+    return moment()
+      .hour(parts[0])
+      .minute(parts[1])
+      .second(0)
+      .millisecond(0);
   }
 }

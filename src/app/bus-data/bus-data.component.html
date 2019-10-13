@@ -16,9 +16,11 @@
       <tr
         *ngFor="let departure of route[1]"
         [ngClass]="{
-          green: departure.colour === 'green',
-          yellow: departure.colour === 'yellow',
-          red: departure.colour === 'red'
+          green: departure.delay.milliseconds < 300000,
+          yellow:
+            departure.delay.milliseconds > 300000 &&
+            departure.delay.milliseconds < 900000,
+          red: departure.delay.milliseconds > 900000
         }"
       >
         <td scope="row">{{ departure.aimed_departure_time }}</td>
@@ -30,7 +32,7 @@
           }}
         </td>
         <td scope="row">
-          {{ departure.delay }}
+          {{ departure.delay.text }}
         </td>
         <td scope="row">{{ departure.ETA }}</td>
       </tr>

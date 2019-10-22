@@ -1,0 +1,11 @@
+<div class="list-group">
+  <a *ngFor="let busStop of busStops?.member"
+    ><a
+      class="list-group-item list-group-item-action"
+      [ngClass]="{ active: busStop.atcocode == selected }"
+      (click)="selectBusStop(busStop.atcocode)"
+      ><h3>{{ busStop.name }}</h3>
+      <p>Distance from your location: {{ busStop.distance }}</p>
+    </a>
+  </a>
+</div>

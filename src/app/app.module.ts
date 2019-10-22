@@ -10,9 +10,10 @@ import { AppComponent } from "./app.component";
 import { BusDataComponent } from "./bus-data/bus-data.component";
 import { FakeBusApiService } from "./fake-bus-api.service";
 import { RealBusApiService, BusApiService } from "./bus-api.service";
+import { BusStopsComponent } from "./bus-stops/bus-stops.component";
 
 @NgModule({
-  declarations: [AppComponent, BusDataComponent],
+  declarations: [AppComponent, BusDataComponent, BusStopsComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [
     {

@@ -5,14 +5,23 @@
         <app-bus-data class="col" [config]="loadedConfig"></app-bus-data>
       </ng-container>
     </ng-container>
+    <ng-container *ngIf="busStops | async as loadedStops">
+      <ng-container *ngIf="busStops | async as loadedStops; else loading">
+        <app-bus-stops
+          class="col"
+          (selectedBusStop)="getConfig($event)"
+          [busStops]="loadedStops"
+        ></app-bus-stops>
+      </ng-container>
+    </ng-container>
   </div>
   <div class="row main">
     <button
       type="button"
       class="col col-4 offset-4 btn btn-primary"
-      (click)="getConfig()"
+      (click)="getBusStops()"
     >
-      Get live arrivals
+      Use my location
     </button>
   </div>
 </div>

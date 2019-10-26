@@ -14,6 +14,7 @@ export interface Departures {
   mode: "bus";
   line: string;
   line_name: string;
+  direction: string;
   aimed_departure_time: string;
   expected_departure_time: string;
   best_departure_estimate: string;

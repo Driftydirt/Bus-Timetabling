@@ -12,7 +12,7 @@ import {
 
 export interface Results {
   name: string;
-  routes: [number, Departures[]][];
+  routes: [string, Departures[]][];
 }
 
 @Component({
@@ -36,7 +36,7 @@ export class AppComponent {
       map(config => ({
         name: config.name,
         routes: Object.keys(config.departures).map(id => [
-          Number(id),
+          id,
           config.departures[id]
         ])
       }))

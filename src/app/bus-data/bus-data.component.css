@@ -4,6 +4,24 @@
   }
 }
 
+@media screen and (max-width: 320px) {
+  table {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  table {
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  table {
+    font-size: 0.75rem;
+  }
+}
+
 .green {
   background-color: rgba(0, 255, 0, 0.5);
 }
